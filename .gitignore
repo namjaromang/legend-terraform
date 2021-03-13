@@ -15,3 +15,9 @@
 # vendor/
 .idea
 .idea/workspace.xml
+
+# Terraform State File
+# 4명이 같이 작업 할 경우에 해당 파일의 내용이 pr/merge 될 경우, Terraform에서 이전/현 인프라에 상태가 달라져 충돌이 발생 할것으로 예상되어 설정 추가
+.terraform
+*.tfstate
+*.tfstate.backup
