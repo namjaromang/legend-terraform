@@ -6,7 +6,7 @@ resource "aws_key_pair" "terraform-key" {
 resource "aws_instance" "example" {
   ami                    = "ami-00f1068284b9eca92"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = ["${aws_security_group.instance.id}"]
+  vpc_security_group_ids = [aws_security_group.instance.id]
 
   user_data = <<-EOF
               #!/bin/bash
@@ -18,7 +18,7 @@ resource "aws_instance" "example" {
 resource "aws_launch_configuration" "example" {
   image_id        = "ami-00f1068284b9eca92"
   instance_type   = "t2.micro"
-  security_groups = ["${aws_security_group.instance.id}"]
+  security_groups = [aws_security_group.instance.id]
 
   user_data = <<-EOF
               #!/bin/bash
@@ -32,10 +32,10 @@ resource "aws_launch_configuration" "example" {
 }
 
 resource "aws_autoscaling_group" "example" {
-  launch_configuration = "${aws_launch_configuration.example.id}"
+  launch_configuration = aws_launch_configuration.example.id
   availability_zones   = ["ap-northeast-2b"]
 
-  load_balancers    = ["${aws_elb.example.name}"]
+  load_balancers    = [aws_elb.example.name]
   health_check_type = "ELB"
 
   min_size = 2
@@ -52,8 +52,8 @@ resource "aws_security_group" "instance" {
   name = "terraform-example-instance"
 
   ingress {
-    from_port   = "${var.server_port}"
-    to_port     = "${var.server_port}"
+    from_port   = var.server_port
+    to_port     = var.server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -70,12 +70,12 @@ data "aws_availability_zones" "all" {
 resource "aws_elb" "example" {
   name               = "terraform-asg-example"
   availability_zones = ["ap-northeast-2a"]
-  security_groups    = ["${aws_security_group.elb.id}"]
+  security_groups    = [aws_security_group.elb.id]
 
   listener {
     lb_port           = 80
     lb_protocol       = "http"
-    instance_port     = "${var.server_port}"
+    instance_port     = var.server_port
     instance_protocol = "http"
   }
 

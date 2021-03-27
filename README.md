@@ -5,6 +5,10 @@ The Legend team does terraform research
 
 ### - [2주차 테라폼 시작하기](docs/2주차.md)
 
+### - [3주차 테라폼 상태관리](docs/3주차.md)
+
+### - [4주차 테라폼 MODULE](docs/4주차.md)
+
 
 #스터디 절차
 각 도큐먼트에 제목대로 커밋하고 커밋하기전
