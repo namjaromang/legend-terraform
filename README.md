@@ -17,3 +17,9 @@ The Legend team does terraform research
 #순서
 feature 생성 -> 커밋 -> 푸쉬 -> pr 요청
 
+
+#aws 계정
+https://024747744712.signin.aws.amazon.com/console
+name: terraform-root
+password: legendTerra1@
+authority : AdministratorAccess
